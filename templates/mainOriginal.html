@@ -1,0 +1,229 @@
+<html>
+<head>
+    <title>Chat - Nolan.ai</title>
+    <!-- perfect-scrollbar CSS -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css">
+
+    <!-- perfect-scrollbar JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            align-items: center;
+        }
+
+       .header {
+            top: 0;
+            display: flex;
+            position: fixed;
+            justify-content: center;
+            width: 100%;
+            padding: 10px 0px;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header h2 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 15px;
+            border-radius: 17px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .a1{
+           position:fixed;
+            right:5%;
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 4px;
+            background-color: #111111;
+            border-radius: 17px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .a2{
+            position:fixed;
+            right:11.5%;
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 15px;
+            background-color: mediumpurple;
+            border-radius: 17px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            position: fixed;
+            border-radius: 17px;
+            align-items: center;
+            width: 90%; /* match the width of the response div */
+            padding: 10px;
+            background-color: #e9ebee;
+            border-top: 1px solid #ccc;
+            bottom: 10px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 8px;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 8px 20px;
+            background-color: #111111;
+            color: #fff;
+            border-radius: 17px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .response {
+            display: flex;
+            flex-direction: column-reverse;
+            margin-top: calc(10px + 60px);
+            padding: 10px;
+            position: fixed;
+            background-color: #fff;
+            border-radius: 17px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            height: 73%; /* change the height to match the desired height of the response text */
+            overflow-y: scroll; /* add this property to allow scrolling for long responses */
+            color: grey;
+            text-align: left;
+            margin-bottom: 100px; /* adjust this value to match the height of the form + response divs */
+        }
+
+        .user-message {
+            background-color: #388de8;
+            color: #fff;
+            padding: 10px;
+            border-radius: 17px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            clear: both;
+            max-width: 80%;
+            margin-top: 3px;
+        }
+
+        .ai-message {
+            background-color: #e9ebee;
+            color: grey;
+            padding: 10px;
+           border-radius: 17px;
+            margin-bottom: 10px;
+            margin-top: 3px;
+            margin-right: auto;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .response::-webkit-scrollbar {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        .response::-webkit-scrollbar-thumb {
+            border-radius: 17px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+            background-color: #388de8;
+        }
+
+
+
+        .error{
+            background-color: #ff9999;
+            color: white;
+            padding: 10px;
+            border-radius: 17px;
+            margin-bottom: 10px;
+            margin-top: 3px;
+            font-size: 14px;
+            margin-right: auto;
+            max-width: 80%;
+            clear: both;
+        }
+
+
+        body {
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+    </style>
+
+    <script>
+        const chatResponse = document.querySelector(".response");
+        new PerfectScrollbar(chatResponse);
+    </script>
+</head>
+
+
+<body>
+<div class="chat-container">
+    <div class="header">
+        <h2>Nolan.ai</h2>
+        <!--<div class = "a2">
+        <a href="{{ url_for('logout') }}" >Premium</a>
+        </div>-->
+        <div class="a1">
+        <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+    <div class="response">
+        {% if error != '' %}
+        <div class="error">{{error}}</div>
+        {% else %}
+
+        {% endif %}
+
+
+        {% if response != '' %}
+        {% for message in response %}
+        {% if message.sender == 'user' %}
+        <div class="user-message">{{message.text|safe }}</div>
+        {% else %}
+        <div class="ai-message">{{ message.text|safe }}</div>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+
+        {% endif %}
+
+
+
+
+    </div>
+
+
+    <form action="/message/0" method="post">
+
+        <input type="text" name="message" placeholder="Type a message" autocomplete="off">
+        <input type="submit" value="Send">
+    </form>
+
+</div>
+</body>
+</html>

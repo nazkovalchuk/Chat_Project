@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up for Nolan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <style>
+        .signup-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            top: 0;
+            display: flex;
+            position: fixed;
+            justify-content: center;
+            width: 100%;
+            padding: 10px 0px;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+        .header h2 {
+            margin: 0;
+            text-align: center;
+        }
+        .header a {
+            position:absolute;
+            right: 10px;
+            top: 7px;
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 15px;
+            background-color: #111111;
+            border-radius: 17px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #e9ebee;
+            border-radius: 17px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 350px;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            padding: 2.5% 20px;
+            background-color: #111111;
+            color: #fff;
+            border-radius: 17px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        body {
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<div class="signup-container">
+    <div class="header">
+    <h2>Nolan.ai</h2>
+    <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="error">{{error}}</div>
+    <br>
+    <br>
+    <form action="/signup2" method="post">
+
+        <input type="text" name="username" placeholder="Email" value={{username}}>
+        <input type="password" name="password" placeholder="Password" value={{password}}>
+        <input type="password" name="password2" placeholder="Verify Password" value={{password2}}>
+
+        <input type="submit" value="Sign Up">
+    </form>
+</div>
+</body>
+</html>

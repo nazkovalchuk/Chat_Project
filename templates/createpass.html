@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            top: 0;
+            display: flex;
+            position: fixed;
+            justify-content: center;
+            width: 100%;
+            padding: 10px 0px;
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header h2 {
+            margin: 0;
+            text-align: center;
+        }
+        .header a {
+            position:absolute;
+            right: 10px;
+            top: 7px;
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 15px;
+            background-color: #111111;
+            border-radius: 17px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+
+
+
+        .a {
+            color: #fff;
+            text-decoration: solid;
+            padding: 10px 15px;
+            background-color: #0BDA51;
+            width: 90.5%;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .a2 {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #e9ebee;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 350px;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            width: 95%;
+        }
+
+        input[type="submit"] {
+            padding: 2.5% 20px;
+            background-color: #111111;
+            color: #fff;
+            border-radius: 17px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="login-container">
+    <div class="header">
+        <h2>Nolan.ai</h2>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="error">{{error}}</div>
+    <br>
+    <br>
+    <form action="/createpass2" method="post">
+        <h5>Create password for {{username}}</h5>
+        <input type="password" name="newpass" placeholder="New password">
+        <input type="password" name="newpass2" placeholder="Verify password">
+        <input type="submit" value="Verify">
+    </form>
+
+</div>
+
+</body>
+</html>
