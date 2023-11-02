@@ -8,22 +8,36 @@ import re
 
 
 def get_gpt3_response(message):
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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',
+    url = 'http://localhost:8000/v1/chat/completions'  # Replace with your API endpoint
+
+    # Define the JSON data
+    data = {
+        "messages": [
+            {
+                "content": "You are a helpful assistant.",
+                "role": "system"
+            },
+            {
+                "content": message,
+                "role": "user"
+            }
+        ],
+        "max_tokens": 40
     }
 
-    json_data = {
-        'model': 'text-davinci-003',
-        'prompt': message,
-        'max_tokens': 250,
-        'temperature': 0.8,
-        'top_p': 1
-    }
+    # Send a POST request with the JSON data
+    response = requests.post(url, json=data)
+    str = response.json()['choices'][0]['message']['content']
 
-    response = requests.post('https://api.openai.com/v1/completions', headers=headers, json=json_data)
+    # Use regular expression to find text within curly braces
+    result = re.search(r'\{(.*?)}', str, re.DOTALL)
 
-    return response.json()['choices'][0]['text']
+    if result:
+        extracted_text = "{" + result.group(1) + "}"
+        return extracted_text
+    else:
+        return str
+
 
 def generateCodeEmail():
     result = ""

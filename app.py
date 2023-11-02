@@ -76,7 +76,7 @@ class MainPage:
             if l is None:
                 l = ''
 
-            return render_template('main.html', response=l, error='')
+            return render_template('mainOriginal.html', response=l, error='')
 
         @app.route("/message/0", methods=["POST"])
         def message():
@@ -89,7 +89,7 @@ class MainPage:
                 l = mapOfMes.get(session.get('username'))
                 if l is None:
                     l = ''
-                return render_template('main.html', response=l, error="Message can't be empty!")
+                return render_template('mainOriginal.html', response=l, error="Message can't be empty!")
 
             temp = []
             if mapOfMes.get(session.get('username')):
